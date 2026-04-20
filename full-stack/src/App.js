@@ -73,30 +73,30 @@ function App() {
 
   const createEmployee = async () => {
     const newData = await fetch('/create', {
-    method: 'POST',
+    method: 'POST', // The HTTP method for this request is POST, which is used to send data to the server to create a new resource (in this case, a new employee).
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Content-Type': 'application/json', // This header indicates that the content type of the request body is JSON. It tells the server that the data being sent in the request body is in JSON format.
+      'Accept': 'application/json' // This header indicates that the client expects a JSON response from the server. It tells the server that the client can handle JSON data in the response.
     },
-    body: JSON.stringify({
-      ...employee
+    body: JSON.stringify({ // The body of the request is a JSON string that contains the employee data. The employee object is converted to a JSON string using JSON.stringify before being sent in the request body.
+      ...employee // Spread the employee object to include all its properties in the JSON string. This allows us to send all the employee data (EmployeeID, FirstName, LastName, Age, Gender)
     }) 
   })
-  .then(res => res.json());
-  setReturnedData(newData[0]);
+  .then(res => res.json()); // After the fetch request is made, it waits for the response and then converts it to JSON format using the .json() method. The resulting JSON data is stored in the newData variable.
+  setReturnedData(newData[0]); // Updates the state variable returnedData with the first element of the newData array. This assumes that the response from the server is an array of employee objects, and we want to display the first one (the newly created employee) in the UI.
 }
 
 const getAllEmployees = async () => {
-  const newData = await fetch('/api', {
-    method: 'GET',
+  const newData = await fetch('/getAllEmployees', {
+    method: 'GET', // The HTTP method for this request is GET, which is used to retrieve data from the server.
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Content-Type': 'application/json', // This header indicates that the content type of the request body is JSON. However, since this is a GET request, there is typically no body, so this header may not be necessary.
+      'Accept': 'application/json' // This header indicates that the client expects a JSON response from the server. It tells the server that the client can handle JSON data in the response.
     }
   })
-  .then(res => res.json());
-  console.log(newData);
-  setReturnedData(newData);
+  .then(res => res.json()); // After the fetch request is made, it waits for the response and then converts it to JSON format using the .json() method. The resulting JSON data is stored in the newData variable.
+  console.log(newData); // Logs the fetched data to the console for debugging purposes.
+  setReturnedData(newData); // Updates the state variable returnedData with the fetched data. This will trigger a re-render of the component to display the new data. In this case, since the endpoint returns all employees, returnedData will likely be an array of employee objects.
 }
 
   return (

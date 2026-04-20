@@ -39,7 +39,7 @@ app.post('/api', async(req, res) => {
     res.send(result.recordset); 
 });
 
-app.get('/api', async(req, res) => { 
+app.get('/getAllEmployees', async(req, res) => { 
     const result = await dbOperation.getAllEmployees(); // Calls the getAllEmployees function from the dbOperation module to fetch all employee data from the database.
     res.send(result.recordset); 
 });
